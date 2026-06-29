@@ -26,3 +26,17 @@ body::before {
     radial-gradient(circle at 80% 70%, rgba(79,209,255,0.15), transparent 40%);
   pointer-events: none;
 }
+.floating-pad {
+  position: fixed;
+  width: 120px;
+  height: 80px;
+  background: url("https://source.unsplash.com/200x150/?mousepad,neon") center/cover;
+  opacity: 0.08;
+  animation: float 10s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(10deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
