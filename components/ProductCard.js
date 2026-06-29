@@ -1,61 +1,59 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useCart } from "../context/CartContext";
 import Link from "next/link";
 
 export default function ProductCard({ product }) {
+  const { addToCart } = useCart();
+
   return (
-    <Link href={`/product/${product.id}`}>
+    <motion.div
+      whileHover={{ rotateX: 8, rotateY: 8, scale: 1.05 }}
+      transition={{ type: "spring", stiffness: 200 }}
+      style={{
+        perspective: "1000px"
+      }}
+    >
       <div style={{
-        background: "rgba(255,255,255,0.04)",
-        border: "1px solid #2a2a2a",
-        borderRadius: "16px",
+        background: "rgba(255,255,255,0.05)",
         padding: "15px",
-        transition: "0.3s",
-        cursor: "pointer",
-        position: "relative",
-        overflow: "hidden"
+        borderRadius: "16px",
+        border: "1px solid #333",
+        transformStyle: "preserve-3d"
       }}>
 
-        {/* GLOW EFFECT */}
+        {/* FAKE AI MOUSEPAD IMAGE */}
         <div style={{
-          position: "absolute",
-          width: "200px",
-          height: "200px",
-          background: "radial-gradient(circle, rgba(79,209,255,0.2), transparent)",
-          top: "-50px",
-          right: "-50px"
-        }} />
-
-        {/* PRODUCT VISUAL BLOCK (fake mousepad preview) */}
-        <div style={{
-          height: "120px",
+          height: "140px",
           borderRadius: "12px",
-          background: "linear-gradient(135deg, #4fd1ff33, #ff4fd833)",
+          backgroundImage: `url(https://source.unsplash.com/400x300/?mousepad,abstract,neon,desk)`,
+          backgroundSize: "cover",
           marginBottom: "10px"
         }} />
 
-        <h3 style={{ margin: "0" }}>{product.name}</h3>
-
+        <h3>{product.name}</h3>
         <p style={{ color: "#aaa", fontSize: "12px" }}>
           {product.story}
         </p>
 
-        <p style={{ color: "#39ff88", marginTop: "8px" }}>
-          ${product.price}
-        </p>
+        <p style={{ color: "#39ff88" }}>${product.price}</p>
 
-        <button style={{
-          marginTop: "10px",
-          width: "100%",
-          padding: "8px",
-          background: "#ff4fd8",
-          border: "none",
-          borderRadius: "10px",
-          color: "black",
-          fontWeight: "bold"
-        }}>
-          View Product
+        <button
+          onClick={() => addToCart(product)}
+          style={{
+            marginTop: "10px",
+            width: "100%",
+            padding: "8px",
+            background: "#ff4fd8",
+            border: "none",
+            borderRadius: "10px"
+          }}
+        >
+          Add to Cart
         </button>
 
       </div>
-    </Link>
+    </motion.div>
   );
 }
